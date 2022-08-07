@@ -111,31 +111,40 @@ class ReusableCard extends StatelessWidget {
                   bottomLeft: Radius.circular(6))),
           child: Stack(
             children: <Widget>[
-              ClipRRect(
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.black, Colors.lightBlueAccent],
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: CachedNetworkImage(
                     imageUrl: '$imageurl',
                     height: 200,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
-                  )),
-              SizedBox(
-                height: 12,
+                  ),
+                ),
               ),
               Positioned(
                 top: 180,
                 left: 10,
-                child: Text(
-                  '$source',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'RobotoSlab',
-                      fontSize: 14,
-                      color: Colors.white),
+                child: Container(
+                  child: Text(
+                    '$source',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'RobotoSlab',
+                        fontSize: 14,
+                        color: Colors.white),
+                  ),
                 ),
               ),
               Positioned(
-                top: 90,
+                top: 60,
                 left: 20,
                 right: 20,
                 bottom: 30,
@@ -145,9 +154,6 @@ class ReusableCard extends StatelessWidget {
                   style: ktextstyle,
                   textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(
-                height: 4,
               ),
               Positioned(
                 top: 180,
