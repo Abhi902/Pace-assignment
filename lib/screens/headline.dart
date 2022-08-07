@@ -75,6 +75,86 @@ class ReusableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => info(),
+          ),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: 24),
+        width: MediaQuery.of(context).size.width,
+        child: Container(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            alignment: Alignment.bottomCenter,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(6),
+                    bottomLeft: Radius.circular(6))),
+            child: Stack(
+              children: <Widget>[
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(6),
+                    child: Image.network(
+                      '$imageurl',
+                      height: 200,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.cover,
+                    )),
+                SizedBox(
+                  height: 12,
+                ),
+                Positioned(
+                  top: 180,
+                  left: 10,
+                  child: Text(
+                    '$source',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'RobotoSlab',
+                        fontSize: 14,
+                        color: Colors.white),
+                  ),
+                ),
+                Positioned(
+                  top: 100,
+                  left: 20,
+                  right: 20,
+                  bottom: 20,
+                  child: Text(
+                    "$headline",
+                    maxLines: 7,
+                    style: ktextstyle,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Positioned(
+                  top: 180,
+                  left: 100,
+                  child: Text(
+                    '$time',
+                    style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'RobotoSlab',
+                        fontSize: 14,
+                        color: Colors.white70),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+/*GestureDetector(
+      onTap: () {
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => info()));
       },
@@ -86,9 +166,9 @@ class ReusableCard extends StatelessWidget {
               Container(
                 alignment: Alignment.center,
                 child: Image.network(
-                  '$imageurl',
-                  height: 150,
-                  width: 150,
+
+                  height: 350,
+                  width: 350,
                 ),
               ),
               Text(
@@ -122,6 +202,4 @@ class ReusableCard extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
+    );*/
