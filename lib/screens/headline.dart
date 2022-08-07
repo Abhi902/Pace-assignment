@@ -89,7 +89,13 @@ class ReusableCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => info(),
+            builder: (context) => info(
+              blogurl: imageurl,
+              source: this.source,
+              content: this.content,
+              published: this.time,
+              headline: this.headline,
+            ),
           ),
         );
       },
@@ -97,67 +103,65 @@ class ReusableCard extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 24),
         width: MediaQuery.of(context).size.width,
         child: Container(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(6),
-                    bottomLeft: Radius.circular(6))),
-            child: Stack(
-              children: <Widget>[
-                ClipRRect(
-                    borderRadius: BorderRadius.circular(6),
-                    child: CachedNetworkImage(
-                      imageUrl: '$imageurl',
-                      height: 200,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
-                    )),
-                SizedBox(
-                  height: 12,
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          alignment: Alignment.bottomCenter,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(6),
+                  bottomLeft: Radius.circular(6))),
+          child: Stack(
+            children: <Widget>[
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: CachedNetworkImage(
+                    imageUrl: '$imageurl',
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  )),
+              SizedBox(
+                height: 12,
+              ),
+              Positioned(
+                top: 180,
+                left: 10,
+                child: Text(
+                  '$source',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'RobotoSlab',
+                      fontSize: 14,
+                      color: Colors.white),
                 ),
-                Positioned(
-                  top: 180,
-                  left: 10,
-                  child: Text(
-                    '$source',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'RobotoSlab',
-                        fontSize: 14,
-                        color: Colors.white),
-                  ),
+              ),
+              Positioned(
+                top: 90,
+                left: 20,
+                right: 20,
+                bottom: 30,
+                child: Text(
+                  "$headline",
+                  maxLines: 7,
+                  style: ktextstyle,
+                  textAlign: TextAlign.center,
                 ),
-                Positioned(
-                  top: 90,
-                  left: 20,
-                  right: 20,
-                  bottom: 30,
-                  child: Text(
-                    "$headline",
-                    maxLines: 7,
-                    style: ktextstyle,
-                    textAlign: TextAlign.center,
-                  ),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Positioned(
+                top: 180,
+                left: 180,
+                child: Text(
+                  '$time',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      fontFamily: 'RobotoSlab',
+                      fontSize: 14,
+                      color: Colors.white70),
                 ),
-                SizedBox(
-                  height: 4,
-                ),
-                Positioned(
-                  top: 180,
-                  left: 180,
-                  child: Text(
-                    '$time',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w900,
-                        fontFamily: 'RobotoSlab',
-                        fontSize: 14,
-                        color: Colors.white70),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
