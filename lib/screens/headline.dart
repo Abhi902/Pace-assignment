@@ -3,6 +3,7 @@ import 'package:mi_card/constants/constants.dart';
 import 'package:mi_card/model/model.dart';
 import 'package:mi_card/newsdata/news.dart';
 import 'package:mi_card/screens/content.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class headlines extends StatefulWidget {
   @override
@@ -56,6 +57,8 @@ class _headlinesState extends State<headlines> {
                       headline: articles[index].headline,
                       source: articles[index].source,
                       time: articles[index].published,
+                      content: articles[index].content,
+                      url: articles[index].url,
                     );
                   }),
             ),
@@ -66,10 +69,18 @@ class _headlinesState extends State<headlines> {
 class ReusableCard extends StatelessWidget {
   String imageurl;
   String headline;
+  String content;
   String source;
+  String url;
   DateTime time;
 
-  ReusableCard({this.imageurl, this.headline, this.time, this.source});
+  ReusableCard(
+      {this.imageurl,
+      this.headline,
+      this.time,
+      this.source,
+      this.content,
+      this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -97,8 +108,8 @@ class ReusableCard extends StatelessWidget {
               children: <Widget>[
                 ClipRRect(
                     borderRadius: BorderRadius.circular(6),
-                    child: Image.network(
-                      '$imageurl',
+                    child: CachedNetworkImage(
+                      imageUrl: '$imageurl',
                       height: 200,
                       width: MediaQuery.of(context).size.width,
                       fit: BoxFit.cover,
@@ -119,10 +130,10 @@ class ReusableCard extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 100,
+                  top: 90,
                   left: 20,
                   right: 20,
-                  bottom: 20,
+                  bottom: 30,
                   child: Text(
                     "$headline",
                     maxLines: 7,
@@ -135,7 +146,7 @@ class ReusableCard extends StatelessWidget {
                 ),
                 Positioned(
                   top: 180,
-                  left: 100,
+                  left: 180,
                   child: Text(
                     '$time',
                     style: TextStyle(
@@ -153,53 +164,3 @@ class ReusableCard extends StatelessWidget {
     );
   }
 }
-/*GestureDetector(
-      onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => info()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Card(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                alignment: Alignment.center,
-                child: Image.network(
-
-                  height: 350,
-                  width: 350,
-                ),
-              ),
-              Text(
-                "$headline",
-                maxLines: 7,
-                style: ktextstyle,
-                textAlign: TextAlign.center,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      '$source',
-                      style: ktextstyle.copyWith(fontSize: 14),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    Text(
-                      '$time',
-                      style: TextStyle(
-                          fontFamily: 'RobotoSlab',
-                          fontSize: 14,
-                          color: Colors.white70),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );*/
